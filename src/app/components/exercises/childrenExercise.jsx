@@ -1,5 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import CollapseWrapper from "../common/collapse";
+
+const ExerciveComponent = ({ children }) => {
+    const childNum = useRef(0);
+    return React.Children.map(children, (child) => {
+        console.log(child);
+        childNum.current++;
+        return <div className="d-flex flex-row">{childNum.current}. {child}</div>;
+    });
+};
+
 const ChildrenExercise = () => {
     return (
         <CollapseWrapper title="Упражнение">
@@ -10,10 +20,11 @@ const ChildrenExercise = () => {
                 <code>React.Children.map</code> так и{" "}
                 <code>React.Children.toArray</code>
             </p>
-
-            <Component />
-            <Component />
-            <Component />
+            <ExerciveComponent>
+                <Component />
+                <Component />
+                <Component />
+            </ExerciveComponent>
         </CollapseWrapper>
     );
 };
